@@ -3,6 +3,7 @@ import 'package:marker/Student/password.dart';
 import 'package:marker/Student/profile.dart';
 import 'package:marker/Student/selectSub.dart';
 import 'package:marker/pages/login.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 int selected = 0;
 class StudentHome extends StatefulWidget {
@@ -13,81 +14,143 @@ class StudentHome extends StatefulWidget {
 }
 
 class _StudentHomeState extends State<StudentHome> {
-
-  Widget myDrawer(){
+  Widget myDrawer(var wd,var ht){
     Map data = widget.data;
     return SafeArea(
-      child: SizedBox(
-        width: 250.0,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 20.0),
-                child: Text("Hello ${data['name']}",
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      color: Colors.grey[600],
-                      letterSpacing: 1.0
+      child: Container(
+        width: wd*0.7,
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(wd*0.03, ht * 0.1, wd * 0.03, ht * 0.03),
+              decoration: BoxDecoration(
+                color: Theme.of(context).accentColor,
+              ),
+              child: Column(
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: AssetImage("assets/avatar.png"),
+                    radius: 50.0,
                   ),
-                ),
-              ),Divider(
-                thickness: 1.0,
+                  SizedBox(width: 20,),
+                  AutoSizeText("${data['name']}",
+                    maxLines: 1,
+                    style: TextStyle(
+                        fontSize: 40.0,
+                        color: Colors.white,
+                        letterSpacing: 1.0
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                width: 200.0,
-                child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      Navigator.pop(context);
-                      selected = 0;
-                    });
-                  },
-                  child: Text("My Profile"),
-                ),
+            ),SizedBox(
+              height: 30.0,
+            ),
+            FlatButton(
+              color: Colors.grey[100],
+              onPressed: () {
+                setState(() {
+                  Navigator.pop(context);
+                  selected = 0;
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                      Icons.person,
+                    color: Colors.black,
+                  ),
+                  SizedBox(width: 5,),
+                  Text("My Profile" ,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.black
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                width: 200.0,
-                child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      selected = 1;
-                      Navigator.pop(context);
-                    });
-                  },
-                  child: Text("Scan QR Code"),
-                ),
+            ),
+            FlatButton(
+              color: Colors.grey[100],
+              onPressed: () {
+                setState(() {
+                  selected = 1;
+                  Navigator.pop(context);
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    Icons.settings_overscan,
+                    color: Colors.black,
+                  ),
+                  SizedBox(width: 5,),
+                  Text("Scan QR Code",
+                    style: TextStyle(
+                        color: Colors.black
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                width: 200.0,
-                child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      selected = 2;
-                      Navigator.pop(context);
-                    });
-                  },
-                  child: Text("Change Password"),
-                ),
+            ),
+            FlatButton(
+              color: Colors.grey[100],
+              onPressed: () {
+                setState(() {
+                  selected = 2;
+                  Navigator.pop(context);
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    Icons.vpn_key,
+                    color: Colors.black,
+                  ),
+                  SizedBox(width: 5,),
+                  Text("Change Password",
+                    style: TextStyle(
+                        color: Colors.black
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                width: 200.0,
-                child: FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => Login()
-                    ));
-                  },
-                  child: Text("Logout"),
-                ),
-              )
-            ],
-          ),
+            ),SizedBox(height: 20.0,),
+            Divider(
+              color: Colors.grey[500],
+            ),
+            FlatButton(
+              color: Colors.grey[100],
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => Login()
+                ));
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Icon(
+                    Icons.exit_to_app,
+                    color: Colors.black,
+                  ),
+                  SizedBox(width: 5,),
+                  Text("Logout",
+                    style: TextStyle(
+                        color: Colors.black
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -95,7 +158,8 @@ class _StudentHomeState extends State<StudentHome> {
 
   @override
   Widget build(BuildContext context) {
-
+  var wd = MediaQuery.of(context).size.width;
+  var ht = MediaQuery.of(context).size.height;
     Map data = widget.data;
     List<Widget> bWidgets = [
       Profile(data: data),
@@ -106,9 +170,9 @@ class _StudentHomeState extends State<StudentHome> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Marker"),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Theme.of(context).accentColor,
       ),
-      drawer: myDrawer(),
+      drawer: myDrawer(wd,ht),
       body: bWidgets[selected],
 //      body:
     );

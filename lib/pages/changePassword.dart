@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-String host = '10.0.2.2';
+String host = '34.93.94.220';
 
 class ChangePassword extends StatefulWidget {
   final Map data;
@@ -83,47 +83,47 @@ class _ChangePasswordState extends State<ChangePassword> {
   Widget build(BuildContext context) {
     var _textEditController1 = TextEditingController();
     var _textEditController2 = TextEditingController();
+    var ht = MediaQuery.of(context).size.height;
+    var wd = MediaQuery.of(context).size.width;
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 0.0,horizontal: 60.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              textAlign: TextAlign.center,
-              controller: _textEditController1,
-              obscureText: true,
-              onChanged: (String str) => opass = str,
-              decoration: InputDecoration(
-                hintText: "Old Password",
+      width: wd,
+      padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: wd * 0.20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          TextField(
+            textAlign: TextAlign.center,
+            controller: _textEditController1,
+            obscureText: true,
+            onChanged: (String str) => opass = str,
+            decoration: InputDecoration(
+              hintText: "Old Password",
+            ),
+          ),
+          SizedBox(height: ht * 0.04,),
+          TextField(
+            obscureText: true,
+            controller: _textEditController2,
+            textAlign: TextAlign.center,
+            onChanged: (String str) => npass = str,
+            decoration: InputDecoration(
+              hintText: "New Password",
+            ),
+          ),SizedBox(height: ht * 0.05,),
+          RaisedButton(
+            onPressed: () {
+              _textEditController1.clear();
+              _textEditController2.clear();
+              showAlertDialog(context,null);
+            },
+            child: Text("Change Password",
+              style: TextStyle(
+                color: Colors.white
               ),
             ),
-            SizedBox(height: 30.0,),
-            TextField(
-              obscureText: true,
-              controller: _textEditController2,
-              textAlign: TextAlign.center,
-              onChanged: (String str) => npass = str,
-              decoration: InputDecoration(
-                hintText: "New Password",
-              ),
-            ),SizedBox(height: 30.0,),
-            RaisedButton(
-              onPressed: () {
-                _textEditController1.clear();
-                _textEditController2.clear();
-                showAlertDialog(context,null);
-              },
-              color: Colors.red,
-              child: Text("Change Password",
-                style: TextStyle(
-                  color: Colors.white
-                ),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

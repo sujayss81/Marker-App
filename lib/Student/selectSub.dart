@@ -22,9 +22,6 @@ class _SelectSubState extends State<SelectSub> {
     ];
 
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-      ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +57,7 @@ class _SelectSubState extends State<SelectSub> {
                   builder: (context) => Scanner(id:subId,usn: int.parse(widget.data['usn']),)
                 ));
               },
-              color: Colors.blueAccent,
+              color: Theme.of(context).accentColor,
               child: Text("Open Scanner",
                 style: TextStyle(
                   color: Colors.white

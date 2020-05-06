@@ -12,6 +12,8 @@ class Attendance extends StatefulWidget {
 class _AttendanceState extends State<Attendance> {
   @override
   Widget build(BuildContext context) {
+    var ht = MediaQuery.of(context).size.height;
+    var wd = MediaQuery.of(context).size.width;
     return Container(
       child: Center(
         child: Column(
@@ -19,6 +21,7 @@ class _AttendanceState extends State<Attendance> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text("View Attendance Details"),
+            SizedBox(height: ht * 0.02,),
             RaisedButton(
               onPressed: () {
                 showDatePicker(
@@ -33,12 +36,22 @@ class _AttendanceState extends State<Attendance> {
                   ));
                 });
               },
-              child: Text("Pick Date",
-              style: TextStyle(
-                color: Colors.white,
+              child: SizedBox(
+                width: wd * 0.35,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Icon(
+                      Icons.date_range
+                    ),
+                    Text("Pick Date",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    ),
+                  ],
+                ),
               ),
-              ),
-              color: Colors.red,
             ),
           ],
         ),

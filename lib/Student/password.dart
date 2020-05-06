@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-String host = '10.0.2.2';
+String host = '34.93.94.220';
 class Password extends StatefulWidget {
   final Map data;
   Password({this.data});

@@ -22,10 +22,6 @@ class _ShowAttendanceState extends State<ShowAttendance> {
     if(response.body != "") {
       obj = jsonDecode(response.body);
     }
-    else if(response.body == "")
-      {
-        print("Here");
-      }
     List<dynamic> user = [];
     if(obj != null) {
       for (var i in obj) {
@@ -33,10 +29,6 @@ class _ShowAttendanceState extends State<ShowAttendance> {
         usn.add(i['usn']);
         flag.add(0);
       }
-      print("After absent");
-      print(user);
-      print(usn);
-      print(flag);
     }
     response = await get("http://$host/present/${widget.date}/${widget.data['sub_id']}");
     obj = jsonDecode(response.body);
@@ -46,10 +38,6 @@ class _ShowAttendanceState extends State<ShowAttendance> {
         usn.add(i['usn']);
         flag.add(1);
       }
-      print("After Present");
-      print(user);
-      print(usn);
-      print(flag);
     }
     return user;
   }
@@ -76,8 +64,6 @@ class _ShowAttendanceState extends State<ShowAttendance> {
               case ConnectionState.waiting: return Text("Loading");
               default :
                 if(snapshot.hasError){
-                  print(snapshot.error);
-                  print("Error");
                   return Text("Server Error");
                 }
                 else{

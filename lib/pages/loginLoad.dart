@@ -1,16 +1,13 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'dart:convert';
-
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marker/Student/studentHome.dart';
 import 'package:marker/pages/login.dart';
 import 'package:marker/pages/teacherHome.dart';
 
 //Server 34.93.94.220
-String host = '10.0.2.2';
+String host = '34.93.94.220';
 class LoginLoad extends StatelessWidget {
   final Map data;
   LoginLoad({this.data});
@@ -18,14 +15,11 @@ class LoginLoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<Widget> getData() async{
-      print(data);
       if(data['next'] == 'TeacherHome') {
         Response res = await post('http://$host/${data['url']}',
             body: { 'e_id': data['uid'], 'password': data['password']});
-        print(res.statusCode);
         if (res.statusCode == 200) {
           Map obj = jsonDecode(res.body);
-          print(obj);
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (context) => TeacherHome(data: obj)
           ));
@@ -49,10 +43,8 @@ class LoginLoad extends StatelessWidget {
       }
       else{
         Response res = await post('http://$host/${data['url']}', body: { 'usn': data['uid'], 'password': data['password']});
-        print(res.statusCode);
         if (res.statusCode == 200) {
           Map obj = jsonDecode(res.body);
-          print(obj);
           Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (context) => StudentHome(data: obj)
           ));
@@ -77,7 +69,7 @@ class LoginLoad extends StatelessWidget {
     }
     getData();
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Theme.of(context).accentColor,
       body: Container(
         child: FutureBuilder(
           future: getData(),

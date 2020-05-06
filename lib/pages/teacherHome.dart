@@ -3,7 +3,7 @@ import 'package:marker/pages/MyProfile.dart';
 import 'package:marker/pages/attendance.dart';
 import 'package:marker/pages/changePassword.dart';
 import 'package:marker/pages/login.dart';
-import 'package:marker/pages/preabs.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'generateQr.dart';
 
 int selected = 0;
@@ -17,88 +17,165 @@ class TeacherHome extends StatefulWidget {
 
 class _TeacherHomeState extends State<TeacherHome> {
 
-  Widget myDrawer(){
+  Widget myDrawer(var wd, var ht){
     Map data = widget.data;
     return SafeArea(
       child: SizedBox(
-        width: 250.0,
+        width: wd*0.7,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.grey[300],
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 20.0),
-                child: Text("Hello ${data['name']}",
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      color: Colors.grey[600],
-                      letterSpacing: 1.0
-                  ),
+              Container(
+                padding: EdgeInsets.fromLTRB(wd*0.03, ht * 0.1, wd * 0.03, ht * 0.03),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
                 ),
-              ),Divider(
-                thickness: 1.0,
-              ),
-              SizedBox(
-                width: 200.0,
-                child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      Navigator.pop(context);
-                      selected = 0;
-                    });
-                  },
-                  child: Text("My Profile"),
-                ),
-              ),
-              SizedBox(
-                width: 200.0,
-                child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      selected = 1;
-                      Navigator.pop(context);
-                    });
-                  },
-                  child: Text("Display QR Code"),
+                child: Column(
+                  children: <Widget>[
+                    CircleAvatar(
+                      backgroundImage: AssetImage("assets/avatar.png"),
+                      radius: 50.0,
+                    ),
+                    SizedBox(width: 20,),
+                    AutoSizeText("${data['name']}",
+                      maxLines: 1,
+                      style: TextStyle(
+                          fontSize: 40.0,
+                          color: Colors.white,
+                          letterSpacing: 1.0
+                      ),
+                    ),
+                  ],
                 ),
               ),SizedBox(
-                width: 200,
-                child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      selected = 2;
-                      Navigator.pop(context);
-                    });
-                  },
-                  child: Text("Attendance"),
-                ),
+                height: 30.0,
               ),
-              SizedBox(
-                width: 200.0,
-                child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      selected = 3;
-                      Navigator.pop(context);
-                    });
-                  },
-                  child: Text("Change Password"),
-                ),
-              ),
-              SizedBox(
-                width: 200.0,
-                child: FlatButton(
-                  onPressed: () {
+              FlatButton(
+                color: Colors.grey[100],
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
                     selected = 0;
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => Login()
-                    ));
-                  },
-                  child: Text("Logout"),
+                  });
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(
+                      Icons.person,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: 5,),
+                    Text("My Profile" ,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.black
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              FlatButton(
+                color: Colors.grey[100],
+                onPressed: () {
+                  setState(() {
+                    selected = 1;
+                    Navigator.pop(context);
+                  });
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(
+                      Icons.reorder,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: 5,),
+                    Text("Display QR Code",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              FlatButton(
+                color: Colors.grey[100],
+                onPressed: () {
+                  setState(() {
+                    selected = 2;
+                    Navigator.pop(context);
+                  });
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(
+                      Icons.people,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: 5,),
+                    Text("View Attendance",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              FlatButton(
+                color: Colors.grey[100],
+                onPressed: () {
+                  setState(() {
+                    selected = 3;
+                    Navigator.pop(context);
+                  });
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(
+                      Icons.vpn_key,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: 5,),
+                    Text("Change Password",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),
+                    ),
+                  ],
+                ),
+              ),SizedBox(height: 20.0,),
+              Divider(
+                color: Colors.grey[500],
+              ),
+              FlatButton(
+                color: Colors.grey[100],
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => Login()
+                  ));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(
+                      Icons.exit_to_app,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: 5,),
+                    Text("Logout",
+                      style: TextStyle(
+                          color: Colors.black
+                      ),
+                    ),
+                  ],
                 ),
               )
             ],
@@ -110,6 +187,8 @@ class _TeacherHomeState extends State<TeacherHome> {
 
   @override
   Widget build(BuildContext context) {
+    var wd = MediaQuery.of(context).size.width;
+    var ht = MediaQuery.of(context).size.height;
     Map data = widget.data;
     List<Widget> bWidgets = [
       MyProfile(data: widget.data,),
@@ -120,9 +199,9 @@ class _TeacherHomeState extends State<TeacherHome> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Marker"),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor:Theme.of(context).primaryColor,
       ),
-      drawer: myDrawer(),
+      drawer: myDrawer(wd,ht),
       body: bWidgets[selected],
 //      body:
     );

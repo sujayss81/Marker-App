@@ -3,7 +3,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_code_scanner/qr_scanner_overlay_shape.dart';
 import 'package:http/http.dart';
 
-String host = '10.0.2.2';
+String host = '34.93.94.220';
 int flag = 0;
 class Scanner extends StatefulWidget {
   final int id;
@@ -43,34 +43,25 @@ class _ScannerState extends State<Scanner> {
   }
 
   Future<void> sendData() async{
-    print(widget.usn);
-    print(widget.id);
     Response resp = await get("http://$host/attendence/${widget.usn}/${widget.id}/$qrText");
     int res = resp.statusCode;
-    print("Status code $res");
     if(res == 200){
-      print("Attendance Marked Successfully");
       showAlertDialog(context, "Attendance Marked Successfully");
     }
     else if(res == 409){
-      print("Duplicate");
       showAlertDialog(context, "You have already Marked your attendance");
     }
     else if(res == 404){
-      print("Incorrect QR");
       showAlertDialog(context, "Please Scan Correct QR Code");
     }
     else{
-      print("Server Error");
       showAlertDialog(context, "Server Error");
     }
   }
 
   void _onQrViewCreated(QRViewController controller){
     this.controller = controller;
-    print("in QrView Created");
     controller.scannedDataStream.listen((scanData) async{
-        print("In Stream listener");
         if(flag == 0) {
           flag = 1;
           qrText = scanData;

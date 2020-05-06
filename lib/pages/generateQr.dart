@@ -8,7 +8,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 ProgressDialog pr;
 String qr="gg";
-String host = '10.0.2.2';
+String host = '34.93.94.220';
 class GenerateQr extends StatefulWidget {
   final Map data;
   GenerateQr({this.data});
@@ -28,7 +28,6 @@ class _GenerateQrState extends State<GenerateQr> {
         return qr;
       }
       else{
-        print("Something went wrong");
         getData();
         return null;
       }
@@ -41,23 +40,20 @@ class _GenerateQrState extends State<GenerateQr> {
   }
   @override
   Widget build(BuildContext context) {
-    Map data = widget.data;
+    var ht = MediaQuery.of(context).size.height;
     getData();
     return Container(
-        decoration: BoxDecoration(
-          color: Colors.grey[300]
-        ),
         child: Center(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 100.0,),
+              SizedBox(height: ht * 0.1,),
               Text("Scan Code To Mark Attendance",
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: ht * 0.03,
                   letterSpacing: 1.0,
-                  color: Colors.red
+                  color: Theme.of(context).primaryColor
                 ),
-              ),
+              ),SizedBox(height: ht * 0.03,),
               FutureBuilder(
                 future: getData(),
                 builder: (context,snapshot) {
@@ -68,9 +64,10 @@ class _GenerateQrState extends State<GenerateQr> {
                         return new SpinKitThreeBounce(color: Colors.blue,);
                       else
                         return new QrImage(
+                          backgroundColor: Colors.white,
                           data: snapshot.data,
                           version: QrVersions.auto,
-                          size: 300.0,
+                          size: ht * 0.5,
                         );
                   }}
               ),

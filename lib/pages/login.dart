@@ -1,6 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'dart:convert';
 import 'loginLoad.dart';
 
 
@@ -11,6 +10,36 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   String username,password;
+  final key = GlobalKey<FormState>();
+
+  void submit(){
+    if(key.currentState.validate()){
+      key.currentState.save();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => LoginLoad(data : {
+            'uid': username,
+            'password': password,
+            'url': 'teacherLogin',
+            'next':'TeacherHome'
+          })
+      ));
+    }
+  }
+
+  void submitStudent(){
+    if(key.currentState.validate()){
+      key.currentState.save();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => LoginLoad(data : {
+            'uid': username,
+            'password': password,
+            'url': 'studentLogin',
+            'next': 'StudentHome',
+          })
+      ));
+    }
+  }
+
 
 
   @override
@@ -24,41 +53,50 @@ class _LoginState extends State<Login> {
       body: SafeArea(
         child: Center(
           child: SizedBox(
-            width: 200,
+            width: MediaQuery.of(context).size.width * 0.6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                  TextField(
-                    onChanged: (String str) => username = str,
-                    decoration: InputDecoration(
-                      hintText: 'ID',
-                      prefixIcon:  Icon(Icons.person),
-                    ),
+                  Form(
+                      key: key,
+                      child: Column(
+                        children: <Widget>[
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'ID',
+                              prefixIcon:  Icon(Icons.person),
+                            ),
+                            keyboardType: TextInputType.number,
+                            validator: (String val) {
+                              return val.isEmpty ? "Please enter your ID":null;
+                            },
+                            onSaved: (String val){
+                              username = val;
+                            },
+                          ),
+                          SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'Password',
+                              prefixIcon:  Icon(Icons.vpn_key),
+                            ),
+                            obscureText: true,
+                            validator: (String val) {
+                              return val.isEmpty ? "Please enter your password":null;
+                            },
+                            onSaved: (String val){
+                              password = val;
+                            },
+                          ),
+                        ],
+                      )
                   ),
-                  SizedBox(height: 40,),
-                  TextField(
-                    onChanged: (String str){
-                      password = str;
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      prefixIcon:  Icon(Icons.vpn_key),
-                    ),
-                  ),
-                  SizedBox(height: 40,),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
                   RaisedButton(
-                    color: Colors.blueAccent,
+                    color: Colors.redAccent,
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => LoginLoad(data : {
-                            'uid': username,
-                            'password': password,
-                            'url': 'studentLogin',
-                            'next': 'StudentHome',
-                          })
-                      ));
+                      submitStudent();
                     },
                     child: Text(
                       'Login As Student',
@@ -68,16 +106,9 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   RaisedButton(
-                    color: Colors.blueAccent,
+                    color: Colors.blue[700],
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => LoginLoad(data : {
-                      'uid': username,
-                      'password': password,
-                      'url': 'teacherLogin',
-                          'next':'TeacherHome'
-                      })
-                      ));
+                      submit();
                     },
                     child: Text(
                       'Login As Teacher',
