@@ -22,7 +22,7 @@ class _AttendanceState extends State<Attendance> {
           children: <Widget>[
             Text("View Attendance Details"),
             SizedBox(height: ht * 0.02,),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 showDatePicker(
                     context: context,

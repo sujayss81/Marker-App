@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-String host = '34.93.94.220';
+String host = '0454-117-200-105-133.ngrok-free.app';
 class Password extends StatefulWidget {
   final Map data;
   Password({this.data});
@@ -14,7 +14,7 @@ class _PasswordState extends State<Password> {
   void getData() async
   {
     Map data = widget.data;
-    Response res = await post('http://$host/cPassword',body: {
+    Response res = await post(Uri.https(host, '/cPassword') ,body: {
       'oldpassword' : opass,
       'newpassword' : npass,
       'usn' : data['usn']
@@ -39,7 +39,7 @@ class _PasswordState extends State<Password> {
         title: Text("Change Password"),
         content: Text(msg),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -54,14 +54,14 @@ class _PasswordState extends State<Password> {
         title: Text("Change Password"),
         content: Text(msg),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               getData();
             },
             child: Text("Yes"),
           ),
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -110,13 +110,15 @@ class _PasswordState extends State<Password> {
                 hintText: "New Password",
               ),
             ),SizedBox(height: 30.0,),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 _textEditController1.clear();
                 _textEditController2.clear();
                 showAlertDialog(context,null);
               },
-              color: Colors.red,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.red),
+                ),
               child: Text("Change Password",
                 style: TextStyle(
                     color: Colors.white

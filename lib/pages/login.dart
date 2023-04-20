@@ -93,8 +93,10 @@ class _LoginState extends State<Login> {
                       )
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
-                  RaisedButton(
-                    color: Colors.redAccent,
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.redAccent)
+                    ),
                     onPressed: () {
                       submitStudent();
                     },
@@ -105,8 +107,10 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                  RaisedButton(
-                    color: Colors.blue[700],
+                  OutlinedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.blue)
+                    ),
                     onPressed: () {
                       submit();
                     },

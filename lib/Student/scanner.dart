@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:qr_code_scanner/qr_scanner_overlay_shape.dart';
 import 'package:http/http.dart';
 
-String host = '34.93.94.220';
+String host = '0454-117-200-105-133.ngrok-free.app';
 int flag = 0;
 class Scanner extends StatefulWidget {
   final int id;
@@ -23,7 +22,7 @@ class _ScannerState extends State<Scanner> {
       title: Text("Scanner"),
       content: Text(message),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: Text("OK"),
           onPressed: () {
             int count = 0;
@@ -43,7 +42,7 @@ class _ScannerState extends State<Scanner> {
   }
 
   Future<void> sendData() async{
-    Response resp = await get("http://$host/attendence/${widget.usn}/${widget.id}/$qrText");
+    Response resp = await get(Uri.https(host, '/attendence/${widget.usn}/${widget.id}/$qrText'));
     int res = resp.statusCode;
     if(res == 200){
       showAlertDialog(context, "Attendance Marked Successfully");
@@ -64,7 +63,7 @@ class _ScannerState extends State<Scanner> {
     controller.scannedDataStream.listen((scanData) async{
         if(flag == 0) {
           flag = 1;
-          qrText = scanData;
+          qrText = scanData.code;
           await sendData();
         }
       });

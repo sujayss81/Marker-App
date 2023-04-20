@@ -18,7 +18,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
   Future<List> getPresent() async{
     Response response;
     var obj;
-    response = await get("http://$host/absent/${widget.date}/${widget.data['sub_id']}");
+    response = await get(Uri.https(host, '/absent/${widget.date}/${widget.data['sub_id']}'));
     if(response.body != "") {
       obj = jsonDecode(response.body);
     }
@@ -30,7 +30,7 @@ class _ShowAttendanceState extends State<ShowAttendance> {
         flag.add(0);
       }
     }
-    response = await get("http://$host/present/${widget.date}/${widget.data['sub_id']}");
+    response = await get(Uri.https(host, '/present/${widget.date}/${widget.data['sub_id']}'));
     obj = jsonDecode(response.body);
     if(obj != null) {
       for (var i in obj) {

@@ -55,8 +55,10 @@ class _TeacherHomeState extends State<TeacherHome> {
               ),SizedBox(
                 height: 30.0,
               ),
-              FlatButton(
-                color: Colors.grey[100],
+              TextButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.grey)
+                ),
                 onPressed: () {
                   setState(() {
                     Navigator.pop(context);
@@ -80,8 +82,10 @@ class _TeacherHomeState extends State<TeacherHome> {
                   ],
                 ),
               ),
-              FlatButton(
-                color: Colors.grey[100],
+              TextButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.grey)
+                ),
                 onPressed: () {
                   setState(() {
                     selected = 1;
@@ -104,8 +108,10 @@ class _TeacherHomeState extends State<TeacherHome> {
                   ],
                 ),
               ),
-              FlatButton(
-                color: Colors.grey[100],
+              TextButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.grey)
+                ),
                 onPressed: () {
                   setState(() {
                     selected = 2;
@@ -128,8 +134,10 @@ class _TeacherHomeState extends State<TeacherHome> {
                   ],
                 ),
               ),
-              FlatButton(
-                color: Colors.grey[100],
+              TextButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.grey)
+                ),
                 onPressed: () {
                   setState(() {
                     selected = 3;
@@ -155,8 +163,10 @@ class _TeacherHomeState extends State<TeacherHome> {
               Divider(
                 color: Colors.grey[500],
               ),
-              FlatButton(
-                color: Colors.grey[100],
+              TextButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.grey)
+                ),
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => Login()

@@ -51,8 +51,10 @@ class _StudentHomeState extends State<StudentHome> {
             ),SizedBox(
               height: 30.0,
             ),
-            FlatButton(
-              color: Colors.grey[100],
+            TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.grey)
+              ),
               onPressed: () {
                 setState(() {
                   Navigator.pop(context);
@@ -76,8 +78,10 @@ class _StudentHomeState extends State<StudentHome> {
                 ],
               ),
             ),
-            FlatButton(
-              color: Colors.grey[100],
+            TextButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.grey)
+              ),
               onPressed: () {
                 setState(() {
                   selected = 1;
@@ -100,8 +104,10 @@ class _StudentHomeState extends State<StudentHome> {
                 ],
               ),
             ),
-            FlatButton(
-              color: Colors.grey[100],
+            TextButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.grey)
+              ),
               onPressed: () {
                 setState(() {
                   selected = 2;
@@ -127,8 +133,10 @@ class _StudentHomeState extends State<StudentHome> {
             Divider(
               color: Colors.grey[500],
             ),
-            FlatButton(
-              color: Colors.grey[100],
+            TextButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(Colors.grey)
+              ),
               onPressed: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) => Login()

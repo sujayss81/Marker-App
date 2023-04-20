@@ -51,13 +51,15 @@ class _SelectSubState extends State<SelectSub> {
                 });
               },
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => Scanner(id:subId,usn: int.parse(widget.data['usn']),)
                 ));
               },
-              color: Theme.of(context).accentColor,
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.red)
+              ),
               child: Text("Open Scanner",
                 style: TextStyle(
                   color: Colors.white

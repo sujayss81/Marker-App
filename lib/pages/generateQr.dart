@@ -8,7 +8,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 ProgressDialog pr;
 String qr="gg";
-String host = '34.93.94.220';
+String host = '0454-117-200-105-133.ngrok-free.app';
 class GenerateQr extends StatefulWidget {
   final Map data;
   GenerateQr({this.data});
@@ -19,7 +19,7 @@ class GenerateQr extends StatefulWidget {
 class _GenerateQrState extends State<GenerateQr> {
   Future<String> getData() async{
     Map data = widget.data;
-    Response value = await get('http://$host/generateQR/${data['sub_id']}');
+    Response value = await get(Uri.https(host, '/generateQR/${data['sub_id']}'));
     await Future.delayed(Duration(seconds: 5));
       if(value.statusCode == 200) {
         Response res = value;
@@ -66,7 +66,6 @@ class _GenerateQrState extends State<GenerateQr> {
                         return new QrImage(
                           backgroundColor: Colors.white,
                           data: snapshot.data,
-                          version: QrVersions.auto,
                           size: ht * 0.5,
                         );
                   }}

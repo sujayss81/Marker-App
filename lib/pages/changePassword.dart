@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-String host = '34.93.94.220';
+String host = '0454-117-200-105-133.ngrok-free.app';
 
 class ChangePassword extends StatefulWidget {
   final Map data;
@@ -15,7 +15,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   void getData() async
   {
     Map data = widget.data;
-    Response res = await post('http://$host/changePassword',body: {
+    Response res = await post(Uri.https(host, '/changePassword'),body: {
       'oldpassword' : opass,
       'newpassword' : npass,
       'e_id' : data['e_id']
@@ -39,7 +39,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         title: Text("Change Password"),
         content: Text(msg),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -54,14 +54,14 @@ class _ChangePasswordState extends State<ChangePassword> {
         title: Text("Change Password"),
         content: Text(msg),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               getData();
             },
             child: Text("Yes"),
           ),
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -111,7 +111,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               hintText: "New Password",
             ),
           ),SizedBox(height: ht * 0.05,),
-          RaisedButton(
+          OutlinedButton(
             onPressed: () {
               _textEditController1.clear();
               _textEditController2.clear();

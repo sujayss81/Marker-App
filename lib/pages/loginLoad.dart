@@ -7,7 +7,7 @@ import 'package:marker/pages/login.dart';
 import 'package:marker/pages/teacherHome.dart';
 
 //Server 34.93.94.220
-String host = '34.93.94.220';
+String host = '0454-117-200-105-133.ngrok-free.app';
 class LoginLoad extends StatelessWidget {
   final Map data;
   LoginLoad({this.data});
@@ -16,7 +16,7 @@ class LoginLoad extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<Widget> getData() async{
       if(data['next'] == 'TeacherHome') {
-        Response res = await post('http://$host/${data['url']}',
+        Response res = await post(Uri.https(host, '/${data['url']}'),
             body: { 'e_id': data['uid'], 'password': data['password']});
         if (res.statusCode == 200) {
           Map obj = jsonDecode(res.body);
@@ -29,7 +29,7 @@ class LoginLoad extends StatelessWidget {
             title: Text("Authentication Failed"),
             content: Text("Please Enter Correct Id/Password"),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Center(child: Text("OK")),
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -42,7 +42,7 @@ class LoginLoad extends StatelessWidget {
         }
       }
       else{
-        Response res = await post('http://$host/${data['url']}', body: { 'usn': data['uid'], 'password': data['password']});
+        Response res = await post(Uri.https(host, '/${data['url']}'), body: { 'usn': data['uid'], 'password': data['password']});
         if (res.statusCode == 200) {
           Map obj = jsonDecode(res.body);
           Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -54,7 +54,7 @@ class LoginLoad extends StatelessWidget {
             title: Text("Authentication Failed"),
             content: Text("Please Enter Correct Id/Password"),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Center(child: Text("OK")),
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
