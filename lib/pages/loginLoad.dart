@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marker/Student/studentHome.dart';
+import 'package:marker/constants.dart';
 import 'package:marker/pages/login.dart';
 import 'package:marker/pages/teacherHome.dart';
 
 //Server 34.93.94.220
-String host = '0454-117-200-105-133.ngrok-free.app';
+String host = HOST;
 class LoginLoad extends StatelessWidget {
   final Map data;
   LoginLoad({this.data});

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:marker/constants.dart';
 
-String host = '0454-117-200-105-133.ngrok-free.app';
+String host = HOST;
 
 class ChangePassword extends StatefulWidget {
   final Map data;

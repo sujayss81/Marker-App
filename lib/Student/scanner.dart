@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:marker/constants.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:http/http.dart';
 
-String host = '0454-117-200-105-133.ngrok-free.app';
+String host = HOST;
 int flag = 0;
 class Scanner extends StatefulWidget {
   final int id;

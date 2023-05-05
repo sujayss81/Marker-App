@@ -6,9 +6,11 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../constants.dart';
+
 ProgressDialog pr;
 String qr="gg";
-String host = '0454-117-200-105-133.ngrok-free.app';
+String host = HOST;
 class GenerateQr extends StatefulWidget {
   final Map data;
   GenerateQr({this.data});
